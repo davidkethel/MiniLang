@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniLang.Tests", "MiniLang.Tests\MiniLang.Tests.csproj", "{D9999057-BA5C-4D71-B2F5-47172692B476}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniLang", "MiniLang\MiniLang.csproj", "{9D7C255D-4427-4132-B12F-4EEA48FBE08B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{13515651-218D-4DA1-8E65-AEF1EC067093}"
+	ProjectSection(SolutionItems) = preProject
+		PleaseRead.md = PleaseRead.md
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9999057-BA5C-4D71-B2F5-47172692B476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9999057-BA5C-4D71-B2F5-47172692B476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9999057-BA5C-4D71-B2F5-47172692B476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9999057-BA5C-4D71-B2F5-47172692B476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D7C255D-4427-4132-B12F-4EEA48FBE08B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D7C255D-4427-4132-B12F-4EEA48FBE08B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D7C255D-4427-4132-B12F-4EEA48FBE08B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D7C255D-4427-4132-B12F-4EEA48FBE08B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A66B6379-166E-4081-95F2-C4C0AD9CDCA5}
+	EndGlobalSection
+EndGlobal
