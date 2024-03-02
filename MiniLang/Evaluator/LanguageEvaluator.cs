@@ -135,14 +135,9 @@ public class LanguageEvaluator
 
     private Value EvaluateStatementList(StatementListNode sln, EvaluationContext context)
     {
-        // Don't evaluate a comment if it's the last statement
-        if (sln.Statements.Last() is CommentNode)
-        {
-            sln.Statements.Remove(sln.Statements.Last());
-        }
 
         var ret = Value.Undefined;
-        foreach (var st in sln.Statements)
+        foreach (var st in sln.Statements.Where(statement => statement is not CommentNode))
         {
             ret = Evaluate(st, context);
         }

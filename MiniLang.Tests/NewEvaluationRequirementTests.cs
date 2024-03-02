@@ -54,6 +54,17 @@ public class NewEvaluationRequirementTests
     }
 
     /// <summary>
+    /// Requirement: When evaluating a statement list, if a comment is the last
+    /// statement in the list, it should not alter the return value (which should
+    /// be the return value of the last non-comment statement in the list).
+    /// </summary>
+    [TestMethod]
+    public void TestMultipleCommentsIgnoredDuringExecution()
+    {
+        Assert.AreEqual(new Value(1), Evaluate(@"1; com ""comment""; com ""another comment"""));
+    }
+
+    /// <summary>
     /// Requirement: For logical operations (and/or), if the result is known before
     /// evaluating later expressions, then the later expressions are not evaluated.
     /// </summary>
