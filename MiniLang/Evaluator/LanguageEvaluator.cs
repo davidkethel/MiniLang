@@ -32,6 +32,14 @@ public class LanguageEvaluator
         if (left.Type == DataType.Boolean && node.Operator == OperatorType.LogicalOr && left.BooleanValue == true) { return new Value(true); }
 
         var right = Evaluate(node.Right, context);
+
+        if (left.Type == DataType.Decimal && right.Type == DataType.Integer)
+        {
+            right.Type = DataType.Decimal;
+            right.Set(Convert.ToDecimal(right.IntValue));
+        }
+
+
         if (left.Type != right.Type) throw new InvalidOperationException($"Cannot perform operations on mixed types. Left side is {left.Type}, right side is {right.Type}");
         var type = left.Type;
         switch (node.Operator)
