@@ -113,7 +113,9 @@ public class LanguageEvaluator
         // functions from the parent scope are passed  through
         foreach (var kv in context.Functions) subcontext.Functions[kv.Key] = kv.Value;
 
-        return Evaluate(fun.Body, subcontext);
+        var result = Evaluate(fun.Body, subcontext);
+        if (result.Type != fun.ReturnType) throw new InvalidOperationException($"Function return type does not match expected type for {name}: expected {fun.ReturnType}, got {result.Type}");
+        return result;
     }
 
     private Value EvaluateFunctionDeclaration(FunctionDeclarationNode fdn, EvaluationContext context)
