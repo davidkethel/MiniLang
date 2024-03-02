@@ -135,8 +135,9 @@ public class LanguageEvaluator
 
     private Value EvaluateStatementList(StatementListNode sln, EvaluationContext context)
     {
+
         var ret = Value.Undefined;
-        foreach (var st in sln.Statements)
+        foreach (var st in sln.Statements.Where(statement => statement is not CommentNode))
         {
             ret = Evaluate(st, context);
         }
