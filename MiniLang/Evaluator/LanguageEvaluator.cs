@@ -26,6 +26,11 @@ public class LanguageEvaluator
     private Value EvaluateBinaryExpression(BinaryExpressionNode node, EvaluationContext context)
     {
         var left = Evaluate(node.Left, context);
+
+        // Short circuit. Don't evaluate the rest of the expression if we don't need to.
+        if (left.Type == DataType.Boolean && node.Operator == OperatorType.LogicalAnd && left.BooleanValue == false) { return new Value(false); }
+        if (left.Type == DataType.Boolean && node.Operator == OperatorType.LogicalOr && left.BooleanValue == true) { return new Value(true); }
+
         var right = Evaluate(node.Right, context);
         if (left.Type != right.Type) throw new InvalidOperationException($"Cannot perform operations on mixed types. Left side is {left.Type}, right side is {right.Type}");
         var type = left.Type;
