@@ -222,7 +222,7 @@ public class LanguageParser
     }
 
     /// <summary>
-    /// Parse a Parentheses 
+    /// Parse a an expression that is enclosed in parentheses.
     /// </summary>
     /// <example>
     /// "(4)"
@@ -244,11 +244,6 @@ public class LanguageParser
     /// </example>
     private static Node ParseExpression(IEnumerator<Token> it)
     {
-
-        if (it.Current.Is(TokenType.Symbol, "("))
-        {
-            return ParseParentheses(it);
-        }
 
         var chain = new List<(OperatorType? op, Node node)>
         {
@@ -276,6 +271,8 @@ public class LanguageParser
     private static Node ParseValue(IEnumerator<Token> it)
     {
         if (it.Current.Is(TokenType.Name, "call")) return ParseFunctionCall(it);
+
+        if (it.Current.Is(TokenType.Symbol, "(")) return ParseParentheses(it);
 
         var tok = it.Current;
         it.MoveNext();

@@ -16,8 +16,9 @@ public class NewParsingRequirementTests
     {
         Assert.AreEqual(new Value(1), Evaluate("(1)"));
         Assert.AreEqual(new Value(1 + 2 * 3), Evaluate("1 + 2 * 3"));
-        //Assert.AreEqual(new Value((1 + 2) * 3), Evaluate("(1 + 2) * 3"));
-        // Assert.AreEqual(new Value(1 + (2 * 3)), Evaluate("1 + (2 * 3)"));
+        Assert.AreEqual(new Value((1 + 2) * 3), Evaluate("(1 + 2) * 3"));
+        Assert.AreEqual(new Value(1 + (2 * 3)), Evaluate("1 + (2 * 3)"));
+        Assert.AreEqual(new Value(1 + (2 * (4 - 3))), Evaluate("1 + (2 * (4 - 3))"));
     }
 
     /// <summary>
