@@ -28,9 +28,12 @@ public class NewParsingRequirementTests
     public void TestEmptyStatement()
     {
         Assert.AreEqual(Value.Undefined, Evaluate(""));
+        Assert.AreEqual(Value.Undefined, Evaluate("  "));
         Assert.AreEqual(Value.Undefined, Evaluate(";;"));
+        Assert.AreEqual(Value.Undefined, Evaluate(" ;    ;;"));
         Assert.AreEqual(Value.Null, Evaluate(";null"));
         Assert.AreEqual(new Value(456), Evaluate(";;123;;456"));
+        Assert.AreEqual(new Value(5), Evaluate(" ;    ;;  5"));
         Assert.AreEqual(Value.Undefined, Evaluate("if (true) {}"));
         Assert.AreEqual(new Value(1), Evaluate("if (false) {} else {1}"));
     }
