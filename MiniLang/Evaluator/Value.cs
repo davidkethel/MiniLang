@@ -45,6 +45,7 @@ public class Value
     public Value(string val) : this(DataType.String, val) { }
     public Value(int val) : this(DataType.Integer, val) { }
     public Value(decimal val) : this(DataType.Decimal, val) { }
+    public Value(char val) : this(DataType.Char, val) { }
 
     private static void ValidateValue(DataType type, object? objectValue)
     {
@@ -54,7 +55,8 @@ public class Value
             if (ty != typeof(bool) &&
                 ty != typeof(string) &&
                 ty != typeof(int) &&
-                ty != typeof(decimal))
+                ty != typeof(decimal) &&
+                ty != typeof(char))
             {
                 throw new InvalidOperationException($"Unsupported value data type: {ty.Name}");
             }
@@ -103,6 +105,7 @@ public class Value
                 return true;
             case DataType.Boolean:
             case DataType.String:
+            case DataType.Char:
             case DataType.Integer:
             case DataType.Decimal:
                 return Object.Equals(ObjectValue, other.ObjectValue);
