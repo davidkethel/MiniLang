@@ -40,7 +40,8 @@ public class LanguageParser
         new StringTokenReader('"'),
         new UnsignedDecimalTokenReader(),
         new SymbolTokenReader(ValidSymbols),
-        new NameTokenReader()
+        new NameTokenReader(),
+        new CharTokenReader()
     );
 
     public Node Parse(string code)
@@ -289,6 +290,7 @@ public class LanguageParser
             return ConstantNode.Integer(tok, int.Parse(tok.Value));
         }
         if (tok.Is(TokenType.String)) return ConstantNode.String(tok, tok.Value);
+        if (tok.Is(TokenType.Char)) return ConstantNode.Char(tok, char.Parse(tok.Value));
         if (tok.Is(TokenType.Name, "true")) return ConstantNode.Boolean(tok, true);
         if (tok.Is(TokenType.Name, "false")) return ConstantNode.Boolean(tok, false);
         if (tok.Is(TokenType.Name, "null")) return ConstantNode.Null(tok);

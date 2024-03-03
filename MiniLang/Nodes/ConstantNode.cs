@@ -23,6 +23,7 @@ public class ConstantNode : Node
     public static ConstantNode Integer(Token token, int value) => new(token, DataType.Integer, value);
     public static ConstantNode Decimal(Token token, decimal value) => new(token, DataType.Decimal, value);
     public static ConstantNode String(Token token, string value) => new(token, DataType.String, value);
+    public static ConstantNode Char(Token token, char value) => new(token, DataType.Char, value);
 
     private void VerifyType()
     {
@@ -34,6 +35,7 @@ public class ConstantNode : Node
             DataType.Integer => Value is int,
             DataType.Decimal => Value is decimal,
             DataType.String => Value is string,
+            DataType.Char => Value is char,
             _ => throw new ArgumentOutOfRangeException()
         };
         if (!valid) throw new InvalidOperationException($"Constant type mismatch. Expected {Type}, got {Value.GetType().Name}.");

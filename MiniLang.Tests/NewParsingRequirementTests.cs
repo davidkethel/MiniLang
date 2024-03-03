@@ -72,8 +72,6 @@ public class NewParsingRequirementTests
     [TestMethod]
     public void TestCharacterType()
     {
-        // todo: once char type added, replace this test with the commented code below
-        // Assert.AreEqual(new Value('a'), Evaluate("'a'"));
-        Assert.AreEqual("a", Evaluate("'a'").ObjectValue.ToString());
+        Assert.AreEqual(new Value('a'), Evaluate("'a'"));
     }
 }

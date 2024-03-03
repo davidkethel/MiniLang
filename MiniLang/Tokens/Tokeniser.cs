@@ -24,6 +24,7 @@ public class Tokeniser
         new UnsignedIntegerTokenReader(),
         new SymbolTokenReader(symbols),
         new NameTokenReader(),
+        new CharTokenReader()
     };
 
     public Tokeniser(IEnumerable<char> symbols)
