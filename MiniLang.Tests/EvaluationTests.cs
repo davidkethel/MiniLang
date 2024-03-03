@@ -36,7 +36,7 @@ public class EvaluationTests
     [TestMethod]
     public void TestStatementListEvaluation()
     {
-        Assert.AreEqual(new Value(5), Evaluate("1;2;3;4;5"));
+        Assert.AreEqual(new Value(5), Evaluate("1 * 2;2 + 4;3;4;5"));
     }
 
     [TestMethod]
