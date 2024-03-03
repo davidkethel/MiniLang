@@ -59,13 +59,9 @@ public class LanguageParser
     /// </example>
     private static Node ParseStatementList(IEnumerator<Token> it)
     {
-       
-       
-
         var token = it.Current;
         var list = new List<Node>
         {
-
             ParseStatement(it)
         };
         while (it.Current.Is(TokenType.Symbol, ";"))
@@ -83,9 +79,12 @@ public class LanguageParser
     private static Node ParseStatement(IEnumerator<Token> it)
     {
         // Handle an empty statement and return an Undefined Node
-        if (it.Current.Is(TokenType.Symbol, ";")) { return ConstantNode.Undefined(it.Current); }
-        if (it.Current.Is(TokenType.End)) return ConstantNode.Undefined(it.Current);
-        if (it.Current.Is(TokenType.Symbol, "}")) { return ConstantNode.Undefined(it.Current); }
+        if (it.Current.Is(TokenType.Symbol, ";")
+            || it.Current.Is(TokenType.End)
+            || it.Current.Is(TokenType.Symbol, "}"))
+        {
+            return ConstantNode.Undefined(it.Current); 
+        }
 
         if (it.Current.Is(TokenType.Name, "fun")) return ParseFunctionDeclaration(it);
         if (it.Current.Is(TokenType.Name, "var")) return ParseVariableDeclaration(it);
