@@ -83,7 +83,7 @@ public class LanguageParser
             || it.Current.Is(TokenType.End)
             || it.Current.Is(TokenType.Symbol, "}"))
         {
-            return ConstantNode.Undefined(it.Current); 
+            return ConstantNode.Undefined(it.Current);
         }
 
         if (it.Current.Is(TokenType.Name, "fun")) return ParseFunctionDeclaration(it);
@@ -222,6 +222,21 @@ public class LanguageParser
     }
 
     /// <summary>
+    /// Parse a Parentheses 
+    /// </summary>
+    /// <example>
+    /// "(4)"
+    /// </example>
+    private static Node ParseParentheses(IEnumerator<Token> it)
+    {
+        Expect(it, TokenType.Symbol, "(");
+        var expression = ParseExpression(it);
+        Expect(it, TokenType.Symbol, ")");
+
+        return expression;
+    }
+
+    /// <summary>
     /// Parse an expression
     /// </summary>
     /// <example>
@@ -229,6 +244,12 @@ public class LanguageParser
     /// </example>
     private static Node ParseExpression(IEnumerator<Token> it)
     {
+
+        if (it.Current.Is(TokenType.Symbol, "("))
+        {
+            return ParseParentheses(it);
+        }
+
         var chain = new List<(OperatorType? op, Node node)>
         {
             (null, ParseValue(it))
