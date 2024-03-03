@@ -59,14 +59,19 @@ public class LanguageParser
     /// </example>
     private static Node ParseStatementList(IEnumerator<Token> it)
     {
+        if (it.Current.Is(TokenType.Symbol, "}")) { return  ConstantNode.Undefined(it.Current); } 
+        while (it.Current.Is(TokenType.Symbol, ";")) { it.MoveNext(); }
+
         var token = it.Current;
         var list = new List<Node>
         {
+
             ParseStatement(it)
         };
         while (it.Current.Is(TokenType.Symbol, ";"))
         {
             Expect(it, TokenType.Symbol, ";");
+            while (it.Current.Is(TokenType.Symbol, ";")) { it.MoveNext(); }
             list.Add(ParseStatement(it));
         }
 
@@ -220,7 +225,7 @@ public class LanguageParser
     /// 1 + 2
     /// </example>
     private static Node ParseExpression(IEnumerator<Token> it)
-    {   
+    {
         var chain = new List<(OperatorType? op, Node node)>
         {
             (null, ParseValue(it))
@@ -261,6 +266,12 @@ public class LanguageParser
         if (tok.Is(TokenType.Name, "null")) return ConstantNode.Null(tok);
         if (tok.Is(TokenType.Name, "undefined")) return ConstantNode.Undefined(tok);
         if (tok.Is(TokenType.Name)) return new VariableNode(tok, tok.Value);
+
+
+
+        if (tok.Is(TokenType.End)) return ConstantNode.Undefined(tok);
+
+
         throw new InvalidOperationException($"Unexpected value token: {tok.Type}[{tok.Value}]");
     }
 
