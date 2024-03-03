@@ -184,9 +184,16 @@ public class LanguageParser
         if (it.Current.Is(TokenType.Name, "else"))
         {
             Expect(it, TokenType.Name, "else");
-            Expect(it, TokenType.Symbol, "{");
-            elseBody = ParseStatementList(it);
-            Expect(it, TokenType.Symbol, "}");
+            if (it.Current.Is(TokenType.Name, "if"))
+            {
+                elseBody = ParseIf(it);
+            }
+            else
+            {
+                Expect(it, TokenType.Symbol, "{");
+                elseBody = ParseStatementList(it);
+                Expect(it, TokenType.Symbol, "}");
+            }
         }
         return new IfNode(tok, condition, body, elseBody);
     }

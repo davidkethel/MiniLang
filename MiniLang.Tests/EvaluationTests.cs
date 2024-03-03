@@ -110,6 +110,7 @@ public class EvaluationTests
         Assert.AreEqual(new Value(2), Evaluate("if (true) { 2 } else { 0 }"));
         Assert.AreEqual(Value.Undefined, Evaluate("if (false) { 2 }"));
         Assert.AreEqual(new Value(3), Evaluate("if (1 < 2) { 3 }"));
+        Assert.AreEqual(new Value(2), Evaluate("if (false) { 1 } else { if (true) { 2 }}"));
     }
 
     [TestMethod]
