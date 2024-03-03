@@ -59,8 +59,8 @@ public class LanguageParser
     /// </example>
     private static Node ParseStatementList(IEnumerator<Token> it)
     {
-        if (it.Current.Is(TokenType.Symbol, "}")) { return  ConstantNode.Undefined(it.Current); } 
-        while (it.Current.Is(TokenType.Symbol, ";")) { it.MoveNext(); }
+       
+       
 
         var token = it.Current;
         var list = new List<Node>
@@ -71,7 +71,6 @@ public class LanguageParser
         while (it.Current.Is(TokenType.Symbol, ";"))
         {
             Expect(it, TokenType.Symbol, ";");
-            while (it.Current.Is(TokenType.Symbol, ";")) { it.MoveNext(); }
             list.Add(ParseStatement(it));
         }
 
@@ -83,6 +82,11 @@ public class LanguageParser
     /// </summary>
     private static Node ParseStatement(IEnumerator<Token> it)
     {
+        // Handle an empty statement and return an Undefined Node
+        if (it.Current.Is(TokenType.Symbol, ";")) { return ConstantNode.Undefined(it.Current); }
+        if (it.Current.Is(TokenType.End)) return ConstantNode.Undefined(it.Current);
+        if (it.Current.Is(TokenType.Symbol, "}")) { return ConstantNode.Undefined(it.Current); }
+
         if (it.Current.Is(TokenType.Name, "fun")) return ParseFunctionDeclaration(it);
         if (it.Current.Is(TokenType.Name, "var")) return ParseVariableDeclaration(it);
         if (it.Current.Is(TokenType.Name, "while")) return ParseWhile(it);
@@ -266,12 +270,6 @@ public class LanguageParser
         if (tok.Is(TokenType.Name, "null")) return ConstantNode.Null(tok);
         if (tok.Is(TokenType.Name, "undefined")) return ConstantNode.Undefined(tok);
         if (tok.Is(TokenType.Name)) return new VariableNode(tok, tok.Value);
-
-
-
-        if (tok.Is(TokenType.End)) return ConstantNode.Undefined(tok);
-
-
         throw new InvalidOperationException($"Unexpected value token: {tok.Type}[{tok.Value}]");
     }
 
